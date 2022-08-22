@@ -4,7 +4,7 @@ const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [rootID, setRootID] = useState(1)
+  const [rootID, setRootID] = useState(5004)
   const [hoverSentence, setHoverSentence] = useState({ active: false })
 
   const openSidebar = () => {
