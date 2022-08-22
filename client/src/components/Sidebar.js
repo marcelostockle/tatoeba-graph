@@ -4,15 +4,13 @@ import { useGlobalContext } from '../gContext'
 const Sidebar = () => {
     const { isSidebarOpen,
         closeSidebar,
-        newSentenceMap,
         rootID,
-        setRootID,
-        renderMap } = useGlobalContext()
+        setRootID
+    } = useGlobalContext()
     const [sID, setSID] = useState(1)
     const handleSubmit = (e) => {
         e.preventDefault()
         closeSidebar()
-        newSentenceMap(sID)
         setRootID(sID)
     }
     return (

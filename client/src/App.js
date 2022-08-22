@@ -10,16 +10,17 @@ function App() {
   const { isSidebarOpen,
     openSidebar,
     closeSidebar,
-    rootID,
-    newSentenceMap } = useGlobalContext()
+    rootID
+  } = useGlobalContext()
   const docTitle = "Tatoeba Connected Graph"
   
   useEffect(() => {
     document.title = `${docTitle}. #${rootID}`
   }, [rootID])
+  /*
   useEffect(() => {
-    newSentenceMap(1)
-  }, [])
+    setRootID(1)
+  }, []) */
 
   return (
     <div className="body">

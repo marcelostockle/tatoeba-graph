@@ -1,16 +1,33 @@
-import React from 'react';
-import { useGlobalContext } from '../gContext';
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import { useGlobalContext } from '../gContext'
 
-const SentenceNode = ({sentenceData}) => {
+const SentenceNode = ({sID, expand}) => {
+    console.log(`Rendering sentence node #${sID}`)
+    const [sentence, setSentence] = useState({_id: sID, content: "Loading...", lang: "unknown", links: []})
+    const [doExpand, setDoExpand] = useState(expand)
+    
+    async function fetchSentence() {
+        const api_prefix = "/api/sentence/"
+        await axios.get(`${api_prefix.concat(sID)}`)
+            .then(res => setSentence(res.data))
+            .catch(setSentence({_id: sID, content: "NOT FOUND", lang: "unknown", links: []}))
+    }
+    useEffect(() => {
+        fetchSentence()
+    }, [])
+
     const {setHoverSentence} = useGlobalContext()
-    const {_id, lang, content} = sentenceData
-    const hoverData = {_id, lang, content, active: true}
-
-    console.log(`Rendering sentence #${_id}...`)
-    return (<div className="sNode">
-        <img src={`https://tatoeba.org/img/flags/${lang}.svg`}
-            alt={lang}
-            onMouseOver={() => {setHoverSentence(hoverData)}}/>
+    const conditionalLinks = doExpand ? sentence.links : []
+    return (<div key={sID} className="sNode">
+        <img src={`https://tatoeba.org/img/flags/${sentence.lang}.svg`}
+            alt={sentence.lang}
+            onMouseOver={() => {setHoverSentence({...sentence, active: true})}}
+            onClick={() => {setDoExpand(!doExpand)}}
+        />
+            { conditionalLinks.map((link) => {
+                return <SentenceNode sID={link} expand={false}/>
+            }) }
     </div>)
 }
 
