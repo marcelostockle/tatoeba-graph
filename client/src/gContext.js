@@ -6,7 +6,7 @@ const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [rootID, setRootID] = useState(5004)
   const [hoverSentence, setHoverSentence] = useState({ active: false })
-  const [edgeLength, setEdgeLength] = useState(60)
+  const [edgeLength, setEdgeLength] = useState(80)
 
   const openSidebar = () => {
     setIsSidebarOpen(true)

@@ -25,8 +25,6 @@ const SentenceNode = (props) => {
         edgeLength * Math.sin(2 * Math.PI * props.siblingInd / props.siblings)
     const thisTop = props.siblingInd===-1 ? props.parentTop :
         edgeLength * Math.cos(2 * Math.PI * props.siblingInd / props.siblings)
-    console.log(sID, 2 * Math.PI * props.siblingInd / props.siblings,
-        thisLeft, thisTop, props.siblings, props.parentLeft, props.parentTop)
     return (
         <div
             key={sID}
@@ -34,8 +32,8 @@ const SentenceNode = (props) => {
             style={{top: `${thisTop}px`, left: `${thisLeft}px`,
                 background: `white url(https://tatoeba.org/img/flags/${fetchedSentence.lang}.svg)
                 center no-repeat`}}
-            onMouseOver={() => {setHoverSentence({...fetchedSentence, active: true})}}
-            onClick={() => {setExpand(!expand)}}
+            onMouseEnter={() => {setHoverSentence({...sentence, active: true})}}
+            onClick={(event) => {event.stopPropagation(); setExpand(!expand);}}
         >
         { conditionalLinks.map((link, index) => {
             const childProps = {
