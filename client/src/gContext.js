@@ -6,6 +6,7 @@ const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [rootID, setRootID] = useState(5004)
   const [hoverSentence, setHoverSentence] = useState({ active: false })
+  const [edgeLength, setEdgeLength] = useState(60)
 
   const openSidebar = () => {
     setIsSidebarOpen(true)
@@ -18,12 +19,10 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         isSidebarOpen,
-        openSidebar,
-        closeSidebar,
-        rootID,
-        setRootID,
-        hoverSentence,
-        setHoverSentence
+        openSidebar, closeSidebar,
+        rootID, setRootID,
+        hoverSentence, setHoverSentence,
+        edgeLength, setEdgeLength
       }}
     >
       {children}
