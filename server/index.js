@@ -19,6 +19,8 @@ app.use('/api/sentence', api_router)
 // route not found and error handling
 const notFoundMiddleware = require('./middleware/not-found');
 const errorMiddleware = require('./middleware/error-handler');
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 const start = async () => {
     try {
